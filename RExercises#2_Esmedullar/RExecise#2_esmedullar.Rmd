@@ -1,0 +1,26 @@
+---
+title: "RExercise#2_Esmedullar"
+author: "Jun Dominic Esmedullar"
+date: "2026-09-30"
+output: html_document
+---
+
+``` {r}
+
+
+# TODO: Store 17 in a variable called a, and 5 in a variable called b
+# Then print the results of: a + b, a - b, a * b, a / b
+
+a <- 17
+b <- 5
+a + b
+a - b
+a * b
+a / b
+
+# TODO: Using the same a and b, compute and print a %% b and a %/% b
+# a %% b = remainder of a / b
+# a %/% b = whole-number (integer) division
+
+a %% b
+a %/% b
