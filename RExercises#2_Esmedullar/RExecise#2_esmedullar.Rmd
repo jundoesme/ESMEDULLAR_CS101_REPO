@@ -28,3 +28,139 @@ a %/% b
 # TODO: Print 2 raised to the power of 10 using the ^ operator
 
 2 ^ 10
+
+10 %% 3
+10 %/% 3
+```
+Question #1: Run 17 / 5, 17 %% 5, and 17 %/% 5 side by side. In your own words, explain how these three results relate to each other mathematically.
+
+- division (/) divides values, modulo (%%) takes the resulting remainder after division, and int division (%/%) is similar to division but discards decimal instead.
+
+Question #2: Predict the output of 10 %% 3 and 10 %/% 3 before running the code. Were you correct? If not, explain what you misunderstood.
+
+- 10 is divisible by 3 but has a remainder of 1. Since (%/%) is the operator used, decimal values has been discarded
+
+``` {r}
+
+x <- 42
+y <- 42L
+z <- "42"
+w <- TRUE
+v <- 3 + 21
+
+# TODO: Use typeof() to check the type of each of x, y, z, w, v
+
+print(typeof(x))
+print(typeof(y))
+print(typeof(z))
+print(typeof(w))
+print(typeof(v))
+
+# TODO: Use class() to check the class of each of x, y, z, w, v
+
+print(class(x))
+print(class(y))
+print(class(z))
+print(class(w))
+print(class(v))
+
+# TODO: Use mode() to check the class of each of x, y, z, w, v
+
+print(mode(x))
+print(mode(y))
+print(mode(z))
+print(mode(w))
+print(mode(v))
+
+```
+Question #3): x <- 42 and y <- 42L look almost identical, but typeof(x) and typeof(y) give different answers. Explain the difference in your own words.
+
+- although x and y has the same value and could be classified as double, y has 'L' suffix in it's value which the compiler classifies it as integer
+
+Question #4: Is typeof() ever different from class() and from mode() for the same object? Look at your results above and explain any case where this happens (or, if you did not see one, explain what you would expect for a matrix or factor).
+
+- factor is stored internally as integers, so typeof() reports "integer". However, class() reports "factor" because that is how R treats the object. mode() describes its general mode as "numeric"
+```{r}
+
+num_string <- "123"
+
+# TODO: Convert num_string to a numeric value using as.numeric()
+# Then check its type with typeof(), class(), and mode()
+
+num_value <- as.numeric(num_string)
+
+print(typeof(num_value))
+print(class(num_value))
+print(mode(num_value))
+
+# TODO: Convert the number 0 and the number 1 to logical using as.logical()
+# What do you get?
+
+print(as.logical(0))
+print(as.logical(1))
+
+# TODO: Try converting bad_string to numeric using as.numeric()
+# Run this chunk and observe the warning message and the result
+
+bad_string <- "hello123"
+
+print(as.numeric(bad_string))
+
+```
+
+Question #5: When you ran the conversion-fail chunk, R produced NA and a warning instead of stopping with an error.
+Why do you think R is designed to give a warning here rather than crashing the whole script?
+
+- R cannot convert "hello123" into a numeric value, so it returns NA and gives the warning "NA introduced by coercion"
+
+Question #6: as.logical(0) and as.logical(1) convert to FALSE and TRUE.
+What do you think as.logical(2) and as.logical(-1)` will produce?
+Test it, then explain the rule R seems to be following.
+
+- Both 2 and -1 produce TRUE because they are non-zero values
+
+```{r}
+
+first_name <- "Juan"
+last_name <- "Dela Cruz"
+
+# TODO: Print first_name and last_name using print() and/or cat()
+
+cat("\n-- 1 --\n")
+print(first_name)
+print(last_name)
+
+# TODO: Use paste() to combine first_name and last_name into a full name
+# TODO: Use paste0() to do the same, and compare the two results
+
+cat("\n-- 2 --\n")
+full_name <- paste(first_name, last_name)
+print(full_name)
+
+full_name2 <- paste0(first_name, last_name)
+print(full_name2)
+
+# TODO: Use paste() with the argument sep = "-" to join first_name and
+# last_name with a dash instead of a space
+
+cat("\n-- 3 --\n")
+full_name3 <- paste(first_name, last_name, sep = "")
+print(full_name3)
+
+cat("\n-- 4 --\n")
+age <- 21
+
+# TODO: Use paste0() to build the sentence:
+# "Juan Dela Cruz is 21 years old." by combining full_name, age, and text
+
+sentence <- paste0(first_name, " ", last_name, " is ", age, " years old.")
+print(sentence)
+
+```
+Question #7: paste() and paste0() produced different results for the same two strings. Explain exactly why, referencing what each function does by default.
+
+- paste() uses a space as the default separator between strings, while paste0() uses no separator by default. Therefore, paste(first_name, last_name) produces "Juan Dela Cruz", while paste0(first_name, last_name) produces "JuanDela Cruz"
+
+Question #8: In the strings-numbers chunk, you combined a character string with a numeric variable (age) using paste0() without first converting age to a string.
+
+- paste0() automatically converts its arguments to character strings before joining them. Therefore, the numeric value age is temporarily converted to "21" when it is combined with the character strings
