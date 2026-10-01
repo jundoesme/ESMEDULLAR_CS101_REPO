@@ -24,3 +24,7 @@ a / b
 
 a %% b
 a %/% b
+
+# TODO: Print 2 raised to the power of 10 using the ^ operator
+
+2 ^ 10
