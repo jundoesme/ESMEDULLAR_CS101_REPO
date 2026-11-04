@@ -1,0 +1,172 @@
+---
+title: "RExercise#3_Esmedullar.Rmd"
+output: html_document
+---
+
+```{r}
+#Part A
+
+scores <- c(88, 92, 79, 95, 84)
+subjects <- c("Math", "Science", "History", "PE")
+
+odds <- seq(1, 19, by = 2)
+odds
+seq(0, 1, length.out = 5)
+
+rep("A", 4)
+rep(c("A", "B"), each = 2)
+rep(c("A", "B"), times = 2)
+```
+
+#Question 1
+
+age <- c(15, 28, 32, 36, 27, 18, 52, 39, 42, 29, 35, 31, 27, 22, 37, 34, 19, 20, 57, 49, 50, 37, 46, 25, 17, 12, 42, 53, 41, 51, 35, 24, 33, 8)
+
+#Question 1a. How many data points?
+
+length(age)
+#34 data points
+
+#Question 1b
+
+1/age
+#The reciprocal of age is:
+#[1] 0.06666667 0.03571429 0.03125000 0.02777778 0.03703704 0.05555556 0.01923077 0.02564103 0.02380952
+#[10] 0.03448276 0.02857143 0.03225806 0.03703704 0.04545455 0.02702703 0.02941176 0.05263158 0.05000000
+#[19] 0.01754386 0.02040816 0.02000000 0.02702703 0.02173913 0.04000000 0.05882353 0.08333333 0.02380952
+#[28] 0.01886792 0.02439024 0.01960784 0.02857143 0.04166667 0.03030303 0.12500000
+
+#Question 1c
+
+new_age <- c(age, 0, age)
+length(new_age)
+#new_age is a new vector that contains all of age, then a single 0, then all of age again. Its length is 34 + 1 + 34 = 69. The original age vector is not overwritten.
+
+#Question 1d
+
+min(age)
+max(age)
+#The minimum is 8 and the maximum is 57.
+
+#Question 2
+
+rep(c("A","B"), each = 2)
+rep(c("A","B"), times = 2)
+#each repeats every element individually before moving to the next one. So “A” is repeated 2 times, then “B” is repeated 2 times.
+#times repeats the whole vector from start to finish. So the full sequence “A”, “B” is copied 2 times.
+
+#Question 3
+
+seq(1, 20, by = 2)
+seq(1, 20, length.out = 5)
+
+#by controls the step size.
+#length.out controls the number of elements you want.
+#Use by when the interval itself matters and is fixed. Use length.out when you need a set number of points that cover a range exactly, for example 100 evenly spaced x-values to plot a smooth curve, or 5 evenly spaced cutoffs between the minimum and maximum of a variable.
+
+#Question 4a
+
+vec_num <- 20:60
+
+#Question 4b
+
+mean(vec_num)
+
+#Question 4c
+
+length(vec_num)
+
+```{r}
+#Part B
+
+grades <- c(88, 92, 79, 95, 84)
+names(grades) <- c("Math", "Science", "English", "History", "PE")
+grades[3]
+grades[c(1, 4)]
+grades[c("Science", "PE")]
+
+grades[-c(1, 4)]
+
+grades[grades >= 85]
+```
+
+#Question 5
+#Negative indexing is useful when you know exactly which position to drop, such as removing the first row of a data vector that holds a header or a label by mistake. Logical indexing is the better tool when you don’t know the positions in advance and want to filter by a condition, such as picking out all students whose grades are at least 85 to give them honors recognition, using grades[grades >= 85].
+
+#Question 6
+#The grades vector only has 5 elements, so position 10 does not exist. R returns NA, which stands for a missing value. The name also shows as <NA> because there is no name attached to a position that doesn’t exist.
+
+#Question 7
+result <- Filter(function(i) { all(i %% c(3,5,7) != 0) }, seq(100))
+print(result)
+
+#Output:  [1]  1  2  4  8 11 13 16 17 19 22 23 26 29 31 32 34 37 38 41 43 44 46
+#[23] 47 52 53 58 59 61 62 64 67 68 71 73 74 76 79 82 83 86 88 89 92 94
+#[45] 97 99
+
+```{r}
+#Part C
+
+x <- c(1, 2, 3, 4)
+y <- c(10, 20, 30, 40)
+
+z <- c(1, 2, 3, 4, 5, 6)
+short <- c(1, 0)
+print(z + short)
+
+fruits <- c("apple", "banana", "cherry")
+fruits <- append(fruits, "date")
+fruits <- append(fruits, "kiwi", after = 1)
+print(fruits)
+```
+
+#Question 8
+#When the two vectors were added together, R noticed that short was too small to match z element-by-element, so it automatically repeated short from the beginning until it reached the same length as z. Since z has 6 elements and short has 2, R cycled through short three times, turning it into c(1, 0, 1, 0, 1, 0) behind the scenes, and then performed the addition normally.
+
+#Question 9
+z <- c(1, 2, 3, 4, 5, 6)
+print(z + c(1, 0, 1))
+print(z + c(1, 0, 1, 1))
+#Adding z to c(1, 0, 1) works cleanly with no warning because 6 is an exact multiple of 3, so R can recycle the shorter vector a whole number of times without any leftover elements. Adding z to c(1, 0, 1, 1) however triggers a warning because 6 is not an exact multiple of 4
+
+```{r}
+#Part D
+
+student <- list(
+  name       = "Maria Santos",
+  age        = 20,
+  grades     = c(88, 92, 79),
+  is_enrolled = TRUE
+)
+print(student)
+
+print(student["grades"])
+print(class(student["grades"]))
+
+print(student[["grades"]])
+print(class(student[["grades"]]))
+print(student$name)
+print(student[["grades"]][2])
+```
+
+#Question 10
+#Running class(student["grades"]) returns "list", while class(student[["grades"]]) returns "numeric". Single brackets [ ] treat the list like a container and return a smaller list that still wraps the element inside it. Double brackets [[ ]] is a level deeper and pull out the element itself.
+
+#Question 11
+#A vector can only hold elements of a single data type: all numbers, or all strings, but never both at once. A list, can hold anything: a number, a string, another list, a data frame, a function — all mixed together.
+
+```{r}
+#Part E
+
+inventory <- list(
+  item = c("Notebook", "Pen", "Eraser"),
+  price = c(25.50, 10.00, 5.00),
+  in_stock = c(TRUE, TRUE, FALSE)
+)
+print(inventory$item[inventory$in_stock == TRUE])
+
+inventory$item     <- append(inventory$item, "Ruler")
+inventory$price    <- append(inventory$price, 15.00)
+inventory$in_stock <- append(inventory$in_stock, TRUE)
+print(inventory)
+```
