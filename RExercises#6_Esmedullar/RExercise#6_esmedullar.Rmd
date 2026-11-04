@@ -1,0 +1,107 @@
+---
+title: "RExercise#6_esmedullar"
+output: html_document
+---
+```{r}
+#Part A
+
+name   <- c("Ana", "Ben", "Cid", "Dex", "Eli")
+age    <- c(20, 21, 19, 22, 20)
+passed <- c(TRUE, TRUE, FALSE, TRUE, FALSE)
+
+students <- data.frame(name = name, age = age, passed = passed)
+print(students)
+
+print(typeof(students$name))
+print(class(students$name))
+
+courses <- data.frame(
+  course_code = c("IS101", "IS102", "IS103"),
+  units       = c(3, 3, 2),
+  instructor  = c("Dr. P. Reyes", "Dr. R. Santos", "Dr. S. Cruz")
+)
+print(courses)
+```
+#Question 1
+#A data frame is structured like a table where every column must line up row by row. If one column had 5 values and another had 3, some rows would have missing entries with nothing to fill them, breaking the rectangular structure entirely.
+
+#Question 2
+#A data frame is essentially a list where each element is a vector representing one column.
+```{r}
+#Part B
+
+print(students$age)
+print(students[["age"]])
+print(students["age"])
+print(class(students$age))
+print(class(students[["age"]]))
+print(class(students["age"]))
+
+print(students[2, ])
+
+print(students[3, "name"])
+
+print(students[students$passed == TRUE, ])
+
+print(students[students$passed == TRUE & students$age > 19, ])
+```
+#Question 3
+#class(students["age"]) returns "data.frame" while class(students$age) returns "numeric". Single brackets [ ] subset the data frame but keep the result wrapped as a data frame
+
+#Question 4
+#The & operator combines the two logical vectors element by element, returning TRUE only for rows where both conditions are simultaneously satisfied. Using | instead would return TRUE for any row where at least one condition is met, which would include students who passed regardless of age and students older than 19 regardless of whether they passed.
+
+```{r}
+#Part C
+
+str(students)
+
+print(dim(students))
+print(nrow(students))
+print(ncol(students))
+
+print(names(students))
+
+summary(students)
+```
+#Question 5
+# R produces a five-number summary including the minimum, maximum, mean, and quartiles. For the logical column passed, R counts how many values are TRUE and how many are FALSE. For the character column name, R only reports the length, class, and mode since there is no meaningful way to compute statistics on plain text.
+
+#Question 6
+#str() is more useful when the goal is to quickly inspect the structure of a data frame, such as checking column data types, spotting unexpected type conversions, or confirming how many observations and variables exist. summary() is more useful when the goal is to understand the distribution and range of the data.
+
+```{r}
+#Part D
+
+students$year_level <- c(2, 3, 1, 4, 2)
+print(students)
+
+students$passed <- NULL
+print(students)
+
+print(students[order(students$age), ])
+
+print(students[order(students$age, decreasing = TRUE), ])
+```
+#Question 7
+#No, running students$passed == TRUE after the column has been removed would return NULL and produce an error or unexpected behavior since the column no longer exists in the data frame.
+
+#Question 8
+#order(students$age) first looks at the age values and returns a vector of row positions arranged so that the smallest age comes first, for example c(3, 1, 5, 2, 4). That position vector is then passed into the row index of students[ , ], so R retrieves row 3 first, then row 1, then row 5, and so on.
+
+```{r}
+#Part E
+
+grades <- data.frame(
+  name    = c("Ana", "Ben", "Cid", "Dex", "Eli"),
+  midterm = c(85, 78, 92, 88, 70),
+  final   = c(90, 82, 95, 84, 75)
+)
+grades$average <- (grades$midterm + grades$final) / 2
+print(grades)
+
+grades$remarks <- ifelse(grades$average >= 75, "Passed", "Failed")
+print(grades[grades$remarks == "Failed", c("name", "average")])
+
+print(grades)
+```

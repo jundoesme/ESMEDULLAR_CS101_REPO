@@ -15,11 +15,11 @@ colnames(scores) <- c("Ana", "Ben", "Cid")
 print(scores)
 
 #Question 1
-#By default, R fills a matrix column by column, it takes the first value and places it in row 1 column 1, then moves down before moving right, so the sequence 1–9 runs vertically down each column. Adding byrow = TRUE changes the fill direction to row by row
+#R fills a matrix column by column, it takes the first value and places it in row 1 column 1, then moves down before moving right. Adding byrow = TRUE changes the fill direction to row by row
 
 #Question 2
 matrix(1:8, nrow = 3, ncol = 3)
-#R still produces a matrix but recycles the input vector to fill the missing 9th slot, it loops back to the beginning of 1:8 and reuses 1 to fill the last cell.
+#R recycles the input vector to fill the missing 9th slot, it loops back to the beginning of 1:8 and reuses 1 to fill the last cell.
 
 #Part B
 print(scores[1, 2])
@@ -31,10 +31,10 @@ print(scores[scores >= 90])
 #Question 3
 class(scores[1, ])
 class(scores[, "Ben"])
-#Both return "integer". R automatically downgrades a single row or column from a matrix into a plain vector
+#Both return "integer". 
 
 #Question 4
-#scores[1, ] uses positional indexing. This tells R exactly which row to extract while keeping the column dimension intact, so R can carry the column names along with the result.
+#scores[1, ] uses positional indexing. This tells R exactly which row to extract while keeping the column dimension intact.
 
 #Part C
 a <- matrix(1:4, nrow = 2)
@@ -54,10 +54,10 @@ print(a * b)
 print(a %*% b)
 
 #Question 5
-#Element-wise multiplication (a * b) pairs each cell in a with the cell at the exact same position in b and multiplies them directly; row 1 column 1 of a multiplies with row 1 column 1 of b, and so on. Matrix multiplication (a %*% b) works completely differently; each cell in the result is computed by taking an entire row from a and an entire column from b, multiplying their corresponding elements, and summing everything together.
+#(a * b) pairs each cell in a with the cell at the exact same position in b and multiplies them directly. Matrix multiplication (a %*% b), each cell in the result is computed by taking an entire row from a and an entire column from b, multiplying their corresponding elements, and sums together.
 
 #Question 6
-#In the original scores, the row names describe what each row represents (Quiz1, Quiz2) and the column names describe what each column represents (Ana, Ben, Cid). When they're transposed, rows become columns and columns become rows.
+#In the original scores, the row represents (Quiz1, Quiz2) and the column(Ana, Ben, Cid). When transposed, rows become columns and columns become rows.
 
 #Part D
 scores_v2 <- cbind(scores, Dex = c(85, 91))
@@ -68,10 +68,10 @@ print(scores_v3)
 
 #Question 7
 cbind(scores, c(85, 91, 100))
-#R throws an error and refuses to produce a result entirely. scores has 2 rows, but the vector provided has 3 values. There is no valid way to align them column-wise because each row in the existing matrix needs exactly one corresponding value in the new column.
+#scores has 2 rows, but the vector provided has 3 values. There is no valid way to align them column-wise because each row in the existing matrix needs exactly one corresponding value in the new column.
 
 #Question 8
-#It would use rbind() when new observations are added over time while the variables stay the same. A concrete example is a weekly sales tracker. Each week is a new row, and the columns are fixed categories like Monday, Tuesday, Wednesday, Thursday, Friday.
+#rbind() when new observations are added over time while the variables stay the same. 
 
 #Part E
 arr <- array(1:12, dim = c(2, 3, 2))
@@ -83,7 +83,7 @@ print(arr[, , 1])
 print(dim(arr))
 
 #Question 9
-#dim(arr) returns c(2, 3, 2), and each number maps to one index in arr[row, col, layer]. The first number 2 is the number of rows; how many entries run vertically within each slice. The second number 3 is the number of columns — how many entries run horizontally within each slice. The third number 2 is the number of layers — how many of those 2×3 slices are stacked together
+#dim(arr) returns c(2, 3, 2), and each number maps to one index in arr[row, col, layer]. 
 
 #Question 10
 #A natural real-world fit for a 3D array is monthly sales data across multiple stores and products. Rows represent products, columns represent stores, and each layer represents a different month. January’s sales sit in layer 1, February’s in layer 2, and so on. A single 2D matrix would not be enough because it can only hold one snapshot at a time.

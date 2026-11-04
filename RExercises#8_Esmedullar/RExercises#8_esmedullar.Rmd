@@ -1,0 +1,85 @@
+---
+title: "RExercises#8_esmedullar"
+output: html_document
+---
+
+```{r}
+#Part A
+
+#Question A1A
+scores <- c(88, 72, 95, 60, 83, 91)
+names(scores) <- c("Ana", "Ben", "Carl", "Dina", "Eve", "Felix")
+scores
+
+#Question A1B
+sort(scores)                        
+sort(scores, decreasing = TRUE)
+
+#Question A1C
+sorted_asc <- sort(scores)
+print(sorted_asc)
+
+#Question A1D
+subjects   <- c("Science", "Math", "English", "Filipino", "PE")
+incomplete <- c(85, NA, 90, 70, NA, 95)
+
+#Question A1E
+sort(subjects)
+
+#Question A1F
+sort(incomplete)
+
+#Question A2
+#Yes. As shown in Part A3, the names (Ana, Ben, Carl, etc.) moved along with their corresponding scores after sorting.
+
+#Question A3
+#If your data has NA entries and you run sort(incomplete)[1] to get the lowest score, R quietly drops the NAs first and returns 70. You get a result with no warning
+
+#Question A4
+order(scores)
+sort(scores)
+
+#Question A5
+name    <- c("Ana", "Ben", "Cid", "Dex", "Eli", "Fay", "Gio")
+score   <- c(78, 92, 85, 92, 67, 88, 74)
+section <- c("A", "B", "A", "B", "A", "B", "A")
+
+students <- data.frame(name, score, section)
+students
+
+#Question A5A
+students[order(students$score), ]
+
+#Question A5B
+students[order(students$score, decreasing = TRUE), ]
+
+#Question A6
+#order() returns the index positions of elements arranged from smallest to largest — not the values themselves. So 4 means “the smallest value is at position 4 (Dina = 60)”, 2 means “the next smallest is at position 2 (Ben = 72).
+
+#Question A7
+#sort() only works on a single vector. If you ran sort(students), R would throw an error or behave unexpectedly because a data frame has multiple columns. order() is the correct tool because it returns index positions, and those positions can be used to reorder all columns simultaneously via students[order(...), ].
+
+#Question A8 (Coding)
+scores <- c(78, 92, 85, 92, 67, 88, 74)
+names(scores) <- c("Ana", "Ben", "Cid", "Dex", "Eli", "Fay", "Gio")
+
+cbind(scores, rank(scores))
+
+#Question A8A
+#Both Ben and Dex received rank 6.5.
+
+#Question A8B
+#Ben and Dex both scored 92, which are the 6th and 7th highest values when sorted ascending. By default, R’s rank() uses average ranking for ties.
+
+#Question A8A Dataframe
+sales <- data.frame(
+  employee   = c("Rey", "Sam", "Tin", "Uma", "Val"),
+  units_sold = c(120, 145, 145, 98, 130)
+)
+
+sales$rank <- rank(-sales$units_sold)
+
+sales
+
+#Question A8B Dataframe
+sales[order(sales$units_sold, decreasing = TRUE), ]
