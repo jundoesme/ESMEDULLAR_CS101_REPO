@@ -1,0 +1,87 @@
+---
+title: "Exercise#9_esmedullar"
+output: html_document
+---
+```{r}
+#Question A1A
+shoe_size <- c(6.5, 9.0, 8.5, 8.5, 10.5, 7.0, 9.5, 9.0, 13.0, 7.5,
+               10.5, 8.5, 12.0, 10.5, 13.0, 11.5, 8.5, 5.0, 10.0, 6.5,
+               7.5, 8.5, 10.5, 8.5, 10.5, 11.0, 9.0, 13.0)
+
+height <- c(66.0, 68.0, 64.5, 65.0, 70.0, 64.0, 70.0, 71.0, 72.0, 64.0,
+            74.5, 67.0, 71.0, 71.0, 77.0, 72.0, 59.0, 62.0, 72.0, 66.0,
+            64.0, 67.0, 73.0, 69.0, 72.0, 70.0, 69.0, 70.0)
+
+gender <- c("F", "F", "F", "F", "M", "F", "F", "M", "M", "F",
+            "M", "F", "M", "M", "M", "M", "F", "F", "M", "F",
+            "F", "M", "M", "F", "M", "M", "M", "M")
+
+shoesize <- data.frame(shoe_size, height, gender)
+
+write.csv(shoesize, "shoesize.csv", row.names = FALSE)
+
+shoesize
+
+#Question A1B
+shoesize <- read.csv("shoesize.csv")
+
+tail(shoesize, 5)
+
+#Question A1C
+str(shoesize)
+
+#Question A1D
+dim(shoesize)
+nrow(shoesize)
+ncol(shoesize)
+
+#Question A1E
+summary(shoesize)
+#str() tells you what the data looks like, while summary() tells you what the data contains statistically.
+
+#Question A1F
+males   <- shoesize[shoesize$gender == "M", ]
+females <- shoesize[shoesize$gender == "F", ]
+
+males
+females
+
+#Question A1G
+mean(shoesize$shoe_size)
+mean(shoesize$height)
+
+#Question A1H
+cor(shoesize$shoe_size, shoesize$height)
+#
+
+#Question A2
+shoesize$gender <- factor(shoesize$gender)
+
+levels(shoesize$gender)
+shoesize$gender
+
+#Question A3
+#
+
+#Question A4
+str(shoesize)
+#
+
+#Question A5
+
+#Question A6A
+cor(shoesize$shoe_size, shoesize$height)
+
+#Question A6B
+shoesize[shoesize$shoe_size >= 11, ]
+
+#Question A7
+# Mean height by gender
+mean(males$height)
+mean(females$height)
+
+# Mean shoe size by gender
+mean(males$shoe_size)
+mean(females$shoe_size)
+
+```
