@@ -85,3 +85,49 @@ students$standing <- ifelse(students$average >= 90, "honors",
                             ifelse(students$average >= 75, "good", "needs support"))
 
 ```
+B6
+```{r}
+```
+Part C
+C1
+```{r}
+new_students <- data.frame(
+  id = c(9, 10),
+  name = c("Ines", "Jamal"),
+  sex = c("F", "M"),
+  section = c("C", "A"),
+  midterm = c(81, 70),
+  final = c(84, 68),
+  attendance = c(92, 80),
+  stringsAsFactors = FALSE
+)
+
+new_students$average <- round((new_students$midterm + new_students$final) / 2, 1)
+new_students$passed <- (new_students$average >= 70) & (new_students$attendance >= 75)
+new_students$standing <- ifelse(new_students$average >= 90, "honors",
+                                ifelse(new_students$average >= 75, "good", "needs support"))
+students_all <- rbind(students, new_students)
+```
+C2
+```{r}
+quiz <- c(8, 7, 10, 6, 7, 9, 10, 5, 8, 6)
+students_all <- cbind(students_all, quiz = quiz)
+class(students_all)
+```
+C3
+```{r}
+m <- cbind(midterm = students_all$midterm, final = students_all$final)
+m <- rbind(m, mean = colMeans(m))
+```
+C4
+```{r}
+bad <- data.frame(ID = 11, FullName = "Zoe", Grade = 88)
+tryCatch(
+  rbind(students, bad), 
+  error = function(e) { 
+    message("rbind failed: ", conditionMessage(e))
+    NULL 
+  }
+)
+```
+
